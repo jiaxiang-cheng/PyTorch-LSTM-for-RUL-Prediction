@@ -33,6 +33,7 @@ training epoch to catch up with the performance closely.
 The prediction results will be saved in the folder ```_trials```.
 
 ## Citation
+[![DOI](https://zenodo.org/badge/363314671.svg)](https://zenodo.org/badge/latestdoi/363314671)
 
 ## License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
