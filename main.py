@@ -1,4 +1,4 @@
-"""RUL Prediction eith LSTM"""
+"""RUL Prediction with LSTM"""
 from loading_data import *
 from model import *
 from visualize import *
@@ -6,7 +6,7 @@ import numpy as np
 
 N_HIDDEN = 96  # NUMBER OF HIDDEN STATES
 N_LAYER = 4  # NUMBER OF LSTM LAYERS
-N_EPOCH = 50  # NUM OF EPOCHS
+N_EPOCH = 150  # NUM OF EPOCHS
 MAX = 135  # UPPER BOUND OF RUL
 LR = 0.01  # LEARNING RATE
 
@@ -19,7 +19,7 @@ def testing_function(num, group_for_test):
         X_test_tensors = Variable(torch.Tensor(X_test.to_numpy()))
         X_test_tensors = torch.reshape(X_test_tensors, (X_test_tensors.shape[0], 1, X_test_tensors.shape[1]))
 
-        test_predict = model.forward(X_test_tensors)  # forward pass
+        test_predict = model.forward(X_test_tensors)
         data_predict = max(test_predict[-1].detach().numpy(), 0)
         result_test.append(data_predict)
         rmse_test = np.add(np.power((data_predict - y_test.to_numpy()[ite - 1]), 2), rmse_test)
@@ -62,7 +62,7 @@ def train(model_for_train, ntrain, group_for_train):
             model_for_train.eval()  # evaluate model
             result, rmse = testing_function(num_test, group_test)
 
-            if rmse_temp < rmse and rmse_temp < 35:
+            if rmse_temp < rmse and rmse_temp < 25:
                 result, rmse = result_temp, rmse_temp
                 break
 
